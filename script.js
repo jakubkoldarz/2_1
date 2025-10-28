@@ -1,29 +1,49 @@
 (function () {
-  const example = document.getElementById('example')
-  const cw1 = document.getElementById('cw1')
-  const cw2 = document.getElementById('cw2')
-  const cw3 = document.getElementById('cw3')
-  const answer = document.getElementById('answer')
+    const example = document.getElementById("example");
+    const cw1 = document.getElementById("cw1");
+    const cw2 = document.getElementById("cw2");
+    const cw3 = document.getElementById("cw3");
+    const answer = document.getElementById("answer");
 
-  example.addEventListener("click", function () {
-    fetch('https://jsonplaceholder.typicode.com/posts')
-      .then(response => response.json())
-      .then(array => {
-        console.log(array)
-        answer.innerHTML = JSON.stringify(array);
-      })
-  })
+    example.addEventListener("click", function () {
+        fetch("https://jsonplaceholder.typicode.com/posts")
+            .then((response) => response.json())
+            .then((array) => {
+                console.log(array);
+                answer.innerHTML = JSON.stringify(array);
+            });
+    });
 
-  cw1.addEventListener("click", function () {
-    //TODO
-  })
+    cw1.addEventListener("click", function () {
+        fetch("https://jsonplaceholder.typicode.com/posts")
+            .then((response) => response.json())
+            .then((array) => {
+                console.log(array);
+                answer.innerHTML = null;
+                const list = document.createElement("ul");
+                const elements = array.map((item) => {
+                    const li = document.createElement("li");
 
-  cw2.addEventListener("click", function () {
-    //TODO
-  })
+                    const title = document.createElement("h3");
+                    title.innerHTML = `${item?.title}`;
+                    li.appendChild(title);
 
-  cw3.addEventListener("click", function () {
-    //TODO
-  })
+                    const body = document.createElement("p");
+                    body.innerHTML = `${item?.body}`;
+                    li.appendChild(body);
 
+                    return li;
+                });
+                list.append(...elements);
+                answer.append(list);
+            });
+    });
+
+    cw2.addEventListener("click", function () {
+        //TODO
+    });
+
+    cw3.addEventListener("click", function () {
+        //TODO
+    });
 })();
