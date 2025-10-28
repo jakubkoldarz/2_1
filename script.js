@@ -2,6 +2,7 @@
     const example = document.getElementById("example");
     const cw1 = document.getElementById("cw1");
     const cw1_2 = document.getElementById("cw1_2");
+    const cw1_3 = document.getElementById("cw1_3");
     const cw2 = document.getElementById("cw2");
     const cw3 = document.getElementById("cw3");
     const answer = document.getElementById("answer");
@@ -74,6 +75,24 @@
                 });
                 list.append(...elements);
                 answer.append(list);
+            });
+    });
+
+    cw1_3.addEventListener("click", function () {
+        const loader = document.createElement("p");
+        answer.innerHTML = null;
+        loader.innerHTML = "Processing...";
+        answer.appendChild(loader);
+
+        fetch("https://jsonplaceholder.typicode.com/posts", {
+            method: "POST",
+            body: JSON.stringify({ title: "Lorem ipsum", body: "Tekst w artykule.", userId: 1 }),
+            headers: { "Content-type": "application/json; charset=UTF-8" },
+        })
+            .then((response) => response.json())
+            .then((item) => {
+                loader.remove();
+                answer.innerHTML = `Created item with ID: ${item.id}`;
             });
     });
 
