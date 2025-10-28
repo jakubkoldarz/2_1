@@ -15,10 +15,15 @@
     });
 
     cw1.addEventListener("click", function () {
+        const loader = document.createElement("p");
+        loader.innerHTML = "Loading...";
+        answer.appendChild(loader);
+
         fetch("https://jsonplaceholder.typicode.com/posts")
             .then((response) => response.json())
             .then((array) => {
-                console.log(array);
+                loader.remove();
+
                 answer.innerHTML = null;
                 const list = document.createElement("ul");
                 const elements = array.map((item) => {
